@@ -1,0 +1,15 @@
+Pro všechny testy alpha=0.05
+
+B) Na základě Chí-kvadrát testu, kde mě vyšla p-hodnota 0.221 a nemůžu tedy zamítnout hypotézu, že věková skupina a clinical_gravidity jsou navzájem nezávíslé.
+
+C) Opět Chí-kvadrát test, kde mi vyšla p-hodnota 0.58 opět tedy nemohu zamítnout nulovou hypotézu o nezávislosti
+
+E) Chí-kvadrát test p-hodnota 0.776, opět tedy nemohu zamítnout nulovou hypotézu.
+
+V ani jednom testu, se mi statisticky nepodařilo dokázat nějaký vztah k clinical_gravidity.
+
+P.S. některé funkce jsou v practical_test.py, ale přehlednější mně přijde jupyter notebook practical tasks.ipnb, který obsahuje spustitelné řešení všech úloh včetně před zpracování dat atd.. 
+
+
+word_document.py script se spuští ve formátu python.exe jmeno prijmeni rodne_cislo datum vytvoří soubor generated.docx ve složce data
+příklad spuštění: <environment path>\python.exe word_document.py zdenek syrovy 545646546 1.2.2024

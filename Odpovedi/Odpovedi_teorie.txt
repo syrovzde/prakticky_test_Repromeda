@@ -1,0 +1,38 @@
+1. GATTTCTTACAAAAGCAAGAATATAAGACATTGGAATATAACTTAACGACTACAGAAGTAGTGATGGAGA
+ATGTAACAGCCTTCTGGGAGGAG
+
+2. Cystickou fibrózu a např. F508del, G542X, N1303K, G551D, W1282X
+
+3. Autosomálně recesivní přenašečtví je druh dědičnosti, kde každý z rodičů má právě jeden vadný gen. Aby u dítětě hrozilo autosomálně recesivní onemocnění musí jejich dítě zdědit vadný gen od každého z rodičů.
+
+4. Integrita dat se týká přesnosti a spolehlivosti dat uložených v databázi a zajišťuje, aby informace byly platné, konzistentní a dodržovaly definovaná pravidla a omezení. Zahrnuje udržování správnosti dat po celou dobu jejich životního cyklu, předcházení chybám a udržování důvěryhodnosti informací v systému. Už z této definice vyplývá, že o integritu dat by se měl snažit každý databázový systém nezávisle na operačním systému. Níže jsou některé vlastnosti, které k integritě dat patří a v závorce případný SQL příkaz.
+ 
+	Každá položka v tabulce musí mít unikátní klíč.(PRIMARY KEY)
+	V případě vztahu mezi vícero entitami mít správně nadefinovaný cizí klíč.(FOREIGN KEY (key) REFERENCES table(key))
+	Správně odhadnuté domény jednotlivých sloupců a zvolený odpovídající datový typ.(VARCHAR,INT...)
+	Používat Transakce při změně dat v databázi k zaručení konzistence a atomicity.(BEGIN TRANSACTION;... COMMIT;)
+	Správné nastavení uživatelských práv (zvláště důležité pro operace úpravy a mazaní dat)
+	Zálohování dat(nebo jiný způsob jak zaručit ztrátu dat jako RAID)
+	Validace dat při vkládání dat(CHECK(condition))
+	A některá další jako logování změn, nadefinování paralelního přístupu(např. 2 write operace najednou) atd.
+
+Co se týče linux severu specificky, tak linux nabízí nástroje jako smartctl nebo fsck, které nabízejí kontrolu disků nebo souborového systému,ale SQL je specifický pro systémy pro správu relačních databází(RDBM) a je oddělený od systému na kterém běží.
+
+
+
+5.SQL injection je typ bezpečnostní chyby, ke které dochází, když je útočník schopen manipulovat s dotazem SQL tak že dojde ke vložení škodlivého kódu. Tato chyba může vést k tomu, že případný útočník může získat přístup do databáze nebo databázi poškodit.
+
+SQL injection se dá vyhnout(nebo aspoň snížit riziko) pomocí různých bezpečnostních opatření. Mezi hlavními způsoby je správné kontrolování vstupu od uživatele(řetězce mají rozumný tvar) nebo izolování SQL kodu a uživatele pomocí např. databázového API.
+
+Mezi další způsoby patří Least Privilege principle, kde jde o to nastavovat pro uživatele jenom ta nejzbytnější pravomoce, a pravidelný monitoring a kontrolování aktivity rámci databáze. Samozřejmě existují i složitější metody jako Web Application Firewall a jiné. 
+
+6. Error in .local: Cannot allocate a new connection: 16 connections already opened je chyba spojená s knihovnou RMySQL v jazyce R a vzniká v případě kdy uživatel otevírá příliš mnoho spojení(connection) do databáze. Pravděpodobně to nastavá v situaci, kdy uživatel zapomíná za sebou uzavírat spojení, jelikož vytvářet vícero spojení najednou nemá příliš smysl. Řešením je tedy správně za sebou uzavírat spojení nebo používat jedno spojení pro celý průběh aplikace. K ukončení spojení slouží funkce dbDisconnect(DBconnection).
+
+7.Error in if: argument is of length zero v jazyce R nastává v situaci kdy do podmínky vstoupí výraz nebo vektor o délce nula. To může nastat například když indexujeme prázdné pole nebo se snažíme indexovat sloupec z tabulky(dataframe), který neexistuje. Obecně se dá říct, že tato chybová hláška nám říká, že naše podmínka nedává smysl.
+
+K opravě bych přistupoval tím, že bych zkontroloval jestli všechny položky v podmínce opravdu existují a nejedná se jen o překlep. V případě, že by objekty v podmínce opravdu existivaly, tak bych se zamyslel jestli při jejich vzniku nebo manipulaci může nastat situace kdy mi vznikne prázdné pole nebo NULL objekt.
+
+A Pokud NULL/prázdné pole je legitimní hodnota proměnné(je nepovinná), tak bych upravil podmínku aby nejdříve zkontrovala jestli je objekt NULL a až potom ho zkoušela indexovat. A pokud hodnota NULL není legitimní potom bych se snažil přijít na to, co ji způsobilo.
+
+8. Sekvenování nové generace se dělá, protože má několik výhod oproti jiným(starším) metodám. Mezi hlavní výhody NGS patří paralelizace(zpracování vícero částí nebo sekvencí najednou) a nízká cena zpracování vzorku.
+
